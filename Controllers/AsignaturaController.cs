@@ -14,26 +14,30 @@ namespace platzi_asp_net_core.Controllers
         {
             if(!string.IsNullOrWhiteSpace(asignaturaId))
             {
-                var asignatura = from asig in _context.Asignaturas
-                where asig.Id == asignaturaId
-                select asig;
-                return View(asignatura.SingleOrDefault());
+                        var asignatura = from asig in _context.Asignaturas
+                                        where asig.Id == asignaturaId
+                                        select asig;
+
+                        return View(asignatura.SingleOrDefault());
             }
             else
             {
-                return View("MultiAsignatura", _context.Asignaturas);
+               return View("MultiAsignatura", _context.Asignaturas); 
             }
         }
+
         public IActionResult MultiAsignatura()
         {
             ViewBag.CosaDinamica = "La Monja";
             ViewBag.Fecha = DateTime.Now;
+
             return View("MultiAsignatura", _context.Asignaturas);
         }
+
         private EscuelaContext _context;
         public AsignaturaController(EscuelaContext context)
         {
-            _context = context;
+           _context = context; 
         }
     }
 }

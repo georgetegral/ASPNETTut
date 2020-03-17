@@ -19,19 +19,18 @@ namespace platzi_asp_net_core
             //CreateWebHostBuilder(args).Build().Run();
             var host = CreateWebHostBuilder(args).Build();
 
-            //Para que se elimine al ejecutarse y se guarde memoria
-            using (var scope = host.Services.CreateScope())
+            using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-            try
-            {
-                var context = services.GetRequiredService<EscuelaContext>();
-                context.Database.EnsureCreated();
-            }
-            catch(Exception ex){
-                var logger = services.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "Ocurrio un error");
-            }
+                try 
+                {
+                    var context = services.GetRequiredService<EscuelaContext>();
+                    context.Database.EnsureCreated();
+                }catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
             }
             host.Run();
         }

@@ -14,10 +14,11 @@ namespace platzi_asp_net_core.Controllers
             var escuela = _context.Escuelas.FirstOrDefault();
             return View(escuela);
         }
+
         private EscuelaContext _context;
         public EscuelaController(EscuelaContext context)
         {
-            _context = context;
+           _context = context; 
         }
     }
 }
