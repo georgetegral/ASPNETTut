@@ -6,28 +6,28 @@ using platzi_asp_net_core.Models;
 
 namespace platzi_asp_net_core.Controllers
 {
-    public class AlumnoController : Controller
+    public class CursoController : Controller
     {
         [Route("Asignatura/Index")]
         public IActionResult Index(string id)
         {
             if(!string.IsNullOrWhiteSpace(id))
             {
-                var alumno = from alumn in _context.Alumnos
-                where alumn.Id == id
-                select alumn;
-                return View(alumno.SingleOrDefault());
+                var curso = from cur in _context.Cursos
+                where cur.Id == id
+                select cur;
+                return View(curso.SingleOrDefault());
             }
             else
             {
-                return View("MultiAlumno", _context.Alumnos);
+                return View("MultiCurso", _context.Cursos);
             }
         }
-        public IActionResult MultiAlumno()
+        public IActionResult MultiCurso()
         {
             ViewBag.CosaDinamica = "La Monja";
             ViewBag.Fecha = DateTime.Now;
-            return View("MultiAlumno", _context.Alumnos);
+            return View("MultiAlumno", _context.Cursos);
         }
 
         private List<Alumno> GenerarAlumnosAlAzar()
@@ -47,7 +47,7 @@ namespace platzi_asp_net_core.Controllers
             return listaAlumnos.OrderBy((al) => al.Id).ToList();
         }
         private EscuelaContext _context;
-        public AlumnoController(EscuelaContext context)
+        public CursoController(EscuelaContext context)
         {
             _context = context;
         }
