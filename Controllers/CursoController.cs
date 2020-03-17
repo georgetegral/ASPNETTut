@@ -29,7 +29,21 @@ namespace platzi_asp_net_core.Controllers
             ViewBag.Fecha = DateTime.Now;
             return View("MultiAlumno", _context.Cursos);
         }
-
+        public IActionResult Create()
+        {
+            ViewBag.Fecha = DateTime.Now;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Curso curso)
+        {
+            ViewBag.Fecha = DateTime.Now;
+            var escuela = _context.Escuelas.FirstOrDefault();
+            curso.EscuelaId = escuela.Id;
+            _context.Cursos.Add(curso);
+            _context.SaveChanges();
+            return View();
+        }
         private List<Alumno> GenerarAlumnosAlAzar()
         {
             string[] nombre1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás" };
